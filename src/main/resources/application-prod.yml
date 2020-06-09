@@ -1,0 +1,33 @@
+spring.profiles.include: dev
+spring:
+  liquibase:
+    drop-first: false
+    database-change-log-lock-table: realestate_email_agg_database_change_log_lock
+    database-change-log-table: realestate_email_agg_database_change_log
+    #default-schema: data
+    #liquibase-schema: data
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: false
+        ddl-auto: none
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        #default_schema: data
+        jdbc:
+          batch_size: 30
+          #generate_statistics: true
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+    url: ${JDBC_DATABASE_URL}
+    platform: postgres
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
+io.styko:
+  driverPath: ${GECKODRIVER_PATH}
+  firefoxBinPath: ${FIREFOX_BIN}
+  tokensPath: "/tokens/"
+  credentialsFilePath: "/tokens/credentials.json"

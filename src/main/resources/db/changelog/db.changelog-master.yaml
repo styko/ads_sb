@@ -1,0 +1,153 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: styko
+      changes:
+        - createTable:
+            tableName: ad
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: link
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_price
+                  type: numeric
+                  constraints:
+                    nullable: true
+              - column:
+                  name: currency
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: locality
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: numeric
+                  constraints:
+                    nullable: true
+              - column:
+                  name: category
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contact
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: true
+              - column:
+                  name: count_of_updates
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deactivated
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: true
+              - column:
+                  name: prices
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gallery_url
+                  type: varchar
+                  constraints:
+                    nullable: true
+        - addPrimaryKey:
+            columnNames: id
+            constraintName: pk_ad
+            tableName: ad
+        - createIndex:
+            column:
+              name: link
+            indexName: idx_link
+            tableName: ad
+            unique: true
+        - createSequence:
+             sequenceName: seq_ad_id
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: roles
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - addPrimaryKey:
+                  columnNames: username
+                  constraintName: pk_user
+                  tableName: users
+        - createIndex:
+            column:
+              name: email
+            indexName: idx_email
+            tableName: users
+            unique: true
+        - insert:
+            columns:
+              - column:
+                  name:  username
+                  value:  styko
+              - column:
+                  name:  email
+                  value:  styko@styko.io
+              - column:
+                  name:  password
+                  value:  $2a$10$KpTAYxT0nriSk1zSBt1LeOKDQONvKXa2yAyivKTLUc4V2qJ8qETXG
+              - column:
+                  name:  roles
+                  value:  "[\"ROLE_ADMIN\"]"
+            tableName:  users

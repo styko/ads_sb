@@ -1,0 +1,28 @@
+spring.profiles.include: remote
+spring:
+  liquibase:
+    drop-first: false
+    database-change-log-lock-table: realestate_email_agg_database_change_log_lock
+    database-change-log-table: realestate_email_agg_database_change_log
+    #default-schema: data
+    #liquibase-schema: data
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: false
+        ddl-auto: none
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        #default_schema: data
+        jdbc:
+          batch_size: 30
+          #generate_statistics: true
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+    url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgres
+    username: "postgres"
+    password: "docker"
+    driverClassName: org.postgresql.Driver

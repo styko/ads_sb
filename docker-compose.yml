@@ -1,0 +1,29 @@
+version: '2'
+services:
+  realestate-pg:
+    image: postgres
+    container_name: realestate_pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: docker
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  realestate-pg-admin:
+      image: thajeztah/pgadmin4
+      container_name: realestate_pg_admin
+      restart: unless-stopped
+      ports:
+        - 5050:5050
+  realestate-firefox-standalone:
+    image: selenium/standalone-firefox-debug:3.141.59-zirconium
+    container_name: realestate_standalone_firefox
+    restart: unless-stopped
+    ports:
+      - "4445:4444"
+      - "5901:5900"
+    environment:
+      VNC_NO_PASSWORD: 1
+    volumes:
+      - /dev/shm:/dev/shm

@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  liquibase:
+    drop-first: false
+  jpa.properties:
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+    url: jdbc:h2:mem:data;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    # Enabling H2 Console
+    console.enabled: true
+
+io.styko:
+  security:
+    jwtSecret: stykoSecretKey
+    jwtExpirationMs: 86400000
+  driverPath: "./drivers/geckodriver"
+  firefoxBinPath: "firefoxOptions"
+  headless: true
+  email:
+    from: "reality123abc@gmail.com"
+    to: "reality123abc@gmail.com"
+    linkPatterns: 'href="(https://www.nehnutelnosti.sk/\\d*/.*?)" href="(https://www.topreality.sk/id.*?)"'
+  tokensPath: "./tokens/"
+  applicationName: "Realestate-email-aggregator"
+  credentialsFilePath: "./tokens/credentials.json"
+
+spring.profiles.active: local
