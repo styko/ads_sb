@@ -27,7 +27,5 @@ spring:
     password: ${JDBC_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
 io.styko:
-  driverPath: ${GECKODRIVER_PATH}
-  firefoxBinPath: ${FIREFOX_BIN}
   tokensPath: "/tokens/"
   credentialsFilePath: "/tokens/credentials.json"
