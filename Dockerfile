@@ -6,7 +6,7 @@ RUN mvn clean package
 
 FROM gcr.io/distroless/java:11 AS production-stage
 WORKDIR /app
-COPY --from=build-stage /app/target/*.jar .
+COPY --from=build-stage /app/target/*.jar /app
 COPY tokens/ /tokens/
 
 ENV JDBC_DATABASE_URL ${JDBC_DATABASE_URL}
