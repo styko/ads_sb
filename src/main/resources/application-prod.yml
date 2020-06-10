@@ -1,3 +1,5 @@
+spring.profiles.include: remote
+
 spring:
   port: 80
   liquibase:
@@ -32,5 +34,3 @@ selenium.hub: "http://standalone_firefox:4444/wd/hub"
 io.styko:
   tokensPath: "/tokens/"
   credentialsFilePath: "/tokens/credentials.json"
-
-spring.profiles.include: remote
