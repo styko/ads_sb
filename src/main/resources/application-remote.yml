@@ -1,2 +1,2 @@
-spring.profiles.include: dev
 selenium.hub: "http://localhost:4444/wd/hub"
+spring.profiles.include: dev
