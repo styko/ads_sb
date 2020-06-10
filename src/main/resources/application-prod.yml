@@ -21,10 +21,8 @@ spring:
   datasource:
     hikari:
       maximum-pool-size: 5
-    url: ${JDBC_DATABASE_URL}
+    url: ${DATABASE_URL}
     platform: postgres
-    username: ${JDBC_DATABASE_USERNAME}
-    password: ${JDBC_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
 io.styko:
   tokensPath: "/tokens/"
