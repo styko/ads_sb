@@ -31,4 +31,4 @@ spring:
 
 io.styko:
   tokensPath: "/tokens/"
-  credentialsFilePath: "/tokens/credentials.json"
+  credentialsFilePath: "/tokens/credentials.json"do

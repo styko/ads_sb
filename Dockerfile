@@ -15,7 +15,7 @@ ENV JDBC_DATABASE_URL ${JDBC_DATABASE_URL}
 ENV JDBC_DATABASE_USERNAME ${JDBC_DATABASE_USERNAME}
 ENV JDBC_DATABASE_PASSWORD ${JDBC_DATABASE_PASSWORD}
 
-EXPOSE 80
+EXPOSE 8080
 #CMD ["java -jar /app/realestate_email_aggregator-1.0-SNAPSHOT.jar"]
 ENTRYPOINT ["java","-jar","realestate_email_aggregator-1.0-SNAPSHOT.jar","--spring.profiles.active=prod"]
 
