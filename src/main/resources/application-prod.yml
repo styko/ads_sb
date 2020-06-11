@@ -1,7 +1,6 @@
 spring.profiles.include: remote
 
 spring:
-  port: 80
   liquibase:
     drop-first: false
     database-change-log-lock-table: realestate_email_agg_database_change_log_lock
@@ -29,7 +28,6 @@ spring:
     password: ${JDBC_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
 
-selenium.hub: "http://standalone_firefox:4444/wd/hub"
 
 io.styko:
   tokensPath: "/tokens/"
