@@ -27,8 +27,6 @@ spring:
     username: ${JDBC_DATABASE_USERNAME}
     password: ${JDBC_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
-
-
 io.styko:
   tokensPath: "/tokens/"
-  credentialsFilePath: "/tokens/credentials.json"do
+  credentialsFilePath: "/tokens/credentials.json"
