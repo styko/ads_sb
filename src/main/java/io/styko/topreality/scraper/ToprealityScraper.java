@@ -1,23 +1,24 @@
 package io.styko.topreality.scraper;
 
-import io.styko.common.persistance.Ad;
-import io.styko.common.persistance.Price;
-import io.styko.common.scraper.Scraper;
-import io.styko.common.service.Scrapeable;
-import io.styko.topreality.converter.PropertiesExtractor;
-import io.styko.topreality.pageobject.ToprealityPage;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.regex.Pattern;
-import lombok.extern.slf4j.Slf4j;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import io.styko.common.persistance.Ad;
+import io.styko.common.persistance.Price;
+import io.styko.common.scraper.Scraper;
+import io.styko.topreality.converter.PropertiesExtractor;
+import io.styko.topreality.pageobject.ToprealityPage;
+import lombok.extern.slf4j.Slf4j;
+
 @Component
 @Slf4j
-public class ToprealityScraper extends Scraper<ToprealityPage> implements Scrapeable {
+public class ToprealityScraper extends Scraper<ToprealityPage> {
 
   private static final String LINK_REGEX = "https://www.topreality.sk/id.*";
   private static final Pattern PATTERN = Pattern.compile("href=\"(" + LINK_REGEX + "?)\"");
