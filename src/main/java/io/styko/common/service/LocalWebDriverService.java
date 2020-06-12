@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-@Profile({"!remote"})
+@Profile({"!remote && !prod"})
 public class LocalWebDriverService implements WebDriverProvider {
 
   @Autowired

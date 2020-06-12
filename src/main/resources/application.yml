@@ -14,7 +14,6 @@ spring:
     password:
     driverClassName: org.h2.Driver
   h2:
-    # Enabling H2 Console
     console.enabled: true
 
 io.styko:
