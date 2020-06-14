@@ -1,16 +1,18 @@
-FROM maven:3.6.3-openjdk-11-slim AS build-stage 
+FROM maven:3.6.3-openjdk-11-slim AS build-stage
 WORKDIR /app
 COPY src ./src
-COPY pom.xml . 
-RUN mvn clean package 
+COPY pom.xml .
+RUN mvn clean package
 
 FROM hirokimatsumoto/alpine-openjdk-11 AS production-stage
 WORKDIR /app
 COPY --from=build-stage /app/target/*.jar .
-RUN ls -la 
+RUN ls -la
 COPY tokens/ /tokens/
 RUN ls -la /tokens/*
 
+ENV APP_NAME ${APP_NAME}
+ENV CREDENTIALS ${CREDENTIALS}
 ENV JDBC_DATABASE_URL ${JDBC_DATABASE_URL}
 ENV JDBC_DATABASE_USERNAME ${JDBC_DATABASE_USERNAME}
 ENV JDBC_DATABASE_PASSWORD ${JDBC_DATABASE_PASSWORD}

@@ -33,6 +33,6 @@
 *.gz
 /env/kafka/full-stack/
 /.idea/
-#/tokens/
+/tokens/
 *local*.yml
 *-local.yml

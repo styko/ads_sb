@@ -29,4 +29,3 @@ spring:
     driverClassName: org.postgresql.Driver
 io.styko:
   tokensPath: "/tokens/"
-  credentialsFilePath: "/tokens/credentials.json"
