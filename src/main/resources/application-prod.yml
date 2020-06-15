@@ -1,4 +1,4 @@
-spring.profiles.include: remote
+spring.profiles.include: dev
 
 spring:
   liquibase:
@@ -29,3 +29,4 @@ spring:
     driverClassName: org.postgresql.Driver
 io.styko:
   tokensPath: "/tokens/"
+selenium.hub: "http://standalone_firefox:4444/wd/hub"
