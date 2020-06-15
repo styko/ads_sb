@@ -10,13 +10,10 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +40,8 @@ public class GmailService {
   @Value("${io.styko.tokensPath}")
   private String tokensPath;
 
-  @Value("${io.styko.credentials}")
-  private String credentials;
+  @Value("${io.styko.credentialsFilePath}")
+  private String credentialsFilePath;
 
   public Gmail getGmail() throws IOException {
     return new Gmail.Builder(netHttpTransport, jsonFactory, getCredentials())
@@ -53,10 +50,9 @@ public class GmailService {
   }
 
   private Credential getCredentials() throws IOException {
-    InputStream credentialsStream = new ByteArrayInputStream(credentials.getBytes(StandardCharsets.UTF_8));
     GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(
         jsonFactory,
-        new InputStreamReader(credentialsStream)
+        new InputStreamReader(new FileInputStream(credentialsFilePath))
     );
 
     GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(

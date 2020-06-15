@@ -28,7 +28,7 @@ io.styko:
     to: "reality123abc@gmail.com"
     linkPatterns: 'href="(https://www.nehnutelnosti.sk/\\d*/.*?)" href="(https://www.topreality.sk/id.*?)"'
   tokensPath: "./tokens/"
-  applicationName: ${APP_NAME}
-  credentials: ${CREDENTIALS}
+  credentialsFilePath: "./tokens/credentials.json"
+  applicationName: "Realestate-email-aggregator"
 
 spring.profiles.active: local

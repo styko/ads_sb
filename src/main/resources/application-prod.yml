@@ -29,4 +29,5 @@ spring:
     driverClassName: org.postgresql.Driver
 io.styko:
   tokensPath: "/tokens/"
+  credentialsFilePath: "/tokens/credentials.json"
 selenium.hub: "http://standalone_firefox:4444/wd/hub"
