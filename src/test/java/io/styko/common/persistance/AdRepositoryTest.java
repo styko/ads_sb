@@ -68,14 +68,25 @@ class AdRepositoryTest {
 
   @Test
   void findAllByDeactivatedIsNull() {
-    Ad ad = createAd();
-    ad.setLink("link2");
-    ad.setDeactivated(null);
+    Ad ad2 = createAd();
+    ad2.setLink("link2");
+    ad2.setDeactivated(null);
+    adRepository.save(ad2);
 
-    adRepository.save(ad);
-    List<Ad> allAdds = adRepository.findAll();
-    assertThat(allAdds.size()).isEqualTo(2);
     List<String> linksOfActiveAds = adRepository.findAllLinksByDeactivatedIsNull();
+    assertThat(linksOfActiveAds.size()).isEqualTo(1);
     assertThat(linksOfActiveAds.get(0)).isEqualTo("link2");
+  }
+
+  @Test
+  void findAllByDeactivatedIsNotNull() {
+    Ad ad2 = createAd();
+    ad2.setLink("link2");
+    ad2.setDeactivated(null);
+    adRepository.save(ad2);
+
+    List<Ad> linksOfActiveAds = adRepository.findAllByDeactivatedIsNotNull();
+    assertThat(linksOfActiveAds.size()).isEqualTo(1);
+    assertThat(linksOfActiveAds.get(0)).isEqualTo(ad);
   }
 }

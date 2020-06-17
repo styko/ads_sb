@@ -2,6 +2,7 @@ package io.styko.common.service;
 
 import io.styko.common.persistance.Ad;
 import io.styko.common.persistance.AdRepository;
+import io.styko.security.service.ContextHack;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,6 +42,7 @@ public class WebScraperService {
 
     try {
       linksFromMessages.parallelStream().forEach(link -> {
+        ContextHack.dataRestHackForAuth();
         for (Scrapeable scraper : scrapeables) {
           Optional<Ad> ad = scrapeAd(webDriverPool, link, scraper);
           if(ad.isPresent()){
@@ -47,6 +50,7 @@ public class WebScraperService {
             log.info("Saved ad {}", ad.get());
           }
         }
+        SecurityContextHolder.clearContext();
       });
     } finally {
       webDriverPool.quit();

@@ -16,4 +16,6 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
 
   @Query("select a.link from Ad a where a.deactivated is null")
   List<String> findAllLinksByDeactivatedIsNull();
+
+  List<Ad> findAllByDeactivatedIsNotNull();
 }
