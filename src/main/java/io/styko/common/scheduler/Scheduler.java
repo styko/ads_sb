@@ -40,9 +40,9 @@ public class Scheduler {
   @Scheduled( cron = "${io.styko.findInactiveAdsJob.cron}" )
   public void findInactiveAdsJob(){
     dataRestHackForAuth();
-    log.info("Find findInactiveAdsJob has been scheduled");
+    log.info("findInactiveAdsJob has been scheduled");
     List<String> activeLinks = adRepository.findAllLinksByDeactivatedIsNull();
-    log.info("Count of active links {}", activeLinks.size());
+    log.info("count of active links {}", activeLinks.size());
     webScraperService.scrapeAds(activeLinks);
     SecurityContextHolder.clearContext();
   }
