@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @DataJpaTest
 @Import({PriceConverter.class, GsonConfig.class})
@@ -85,8 +88,8 @@ class AdRepositoryTest {
     ad2.setDeactivated(null);
     adRepository.save(ad2);
 
-    List<Ad> linksOfActiveAds = adRepository.findAllByDeactivatedIsNotNull();
-    assertThat(linksOfActiveAds.size()).isEqualTo(1);
-    assertThat(linksOfActiveAds.get(0)).isEqualTo(ad);
+    Page<Ad> linksOfActiveAds = adRepository.findAllByDeactivatedIsNotNull(PageRequest.of(0,5));
+    assertThat(linksOfActiveAds.getTotalElements()).isEqualTo(1);
+    assertThat(linksOfActiveAds.get().findFirst().get()).isEqualTo(ad);
   }
 }
