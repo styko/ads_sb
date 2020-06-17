@@ -25,7 +25,12 @@ class AdRepositoryTest {
 
   @BeforeEach
   void setUp() {
-    ad = Ad.builder()
+    ad = createAd();
+    adRepository.save(ad);
+  }
+
+  private Ad createAd() {
+    return Ad.builder()
         .link("link")
         .address("address")
         .category("category")
@@ -47,7 +52,6 @@ class AdRepositoryTest {
         ))
         .galleryUrl("galleryUrl")
         .build();
-    adRepository.save(ad);
   }
 
   @Test
@@ -62,4 +66,16 @@ class AdRepositoryTest {
     assertThat(adRepository.findByLink("link").get()).isEqualTo(ad);
   }
 
+  @Test
+  void findAllByDeactivatedIsNull() {
+    Ad ad = createAd();
+    ad.setLink("link2");
+    ad.setDeactivated(null);
+
+    adRepository.save(ad);
+    List<Ad> allAdds = adRepository.findAll();
+    assertThat(allAdds.size()).isEqualTo(2);
+    List<String> linksOfActiveAds = adRepository.findAllLinksByDeactivatedIsNull();
+    assertThat(linksOfActiveAds.get(0)).isEqualTo("link2");
+  }
 }

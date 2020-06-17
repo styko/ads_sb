@@ -30,5 +30,7 @@ io.styko:
   tokensPath: "./tokens/"
   credentialsFilePath: "./tokens/credentials.json"
   applicationName: "Realestate-email-aggregator"
+  findInactiveAdsJob.cron: "0 0 0 * * ?"
+  maxPoolSize: 4
 
 spring.profiles.active: local

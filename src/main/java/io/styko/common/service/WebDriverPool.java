@@ -12,8 +12,10 @@ import org.openqa.selenium.WebDriver;
 public class WebDriverPool {
 
   private final BlockingQueue<WebDriver> objects;
+  private final int maxPoolSize;
 
-  public WebDriverPool(WebDriverProvider webDriverProvider, int linksCount) {
+  public WebDriverPool(WebDriverProvider webDriverProvider, int linksCount, int maxPoolSize) {
+    this.maxPoolSize = maxPoolSize;
     List<WebDriver> webDrivers = IntStream.rangeClosed(1, getSizeOfPool(linksCount))
         .mapToObj(i -> webDriverProvider.createWebDriver())
         .collect(Collectors.toList());
@@ -21,8 +23,8 @@ public class WebDriverPool {
   }
 
   private int getSizeOfPool(int linksCount) {
-    int linksDivided = linksCount / 8;
-    int spawnThreads = linksDivided == 0 ? 1 : Math.min(linksDivided, 8);
+    int linksDivided = linksCount / maxPoolSize;
+    int spawnThreads = linksDivided == 0 ? 1 : Math.min(linksDivided, maxPoolSize);
     log.info("spawnThreads {}", spawnThreads);
     return spawnThreads;
   }

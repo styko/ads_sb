@@ -8,9 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,16 +24,22 @@ public class WebScraperService {
   @Autowired
   private AdRepository adRepository;
 
+  @Value("${io.styko.maxPoolSize}")
+  private int maxPoolSize;
+
   public void scrapeAds(List<String> linksFromMessages) {
     if(linksFromMessages.isEmpty()){
       return;
     }
 
-    WebDriverPool webDriverPool = new WebDriverPool(webDriverProvider, linksFromMessages.size());
+    WebDriverPool webDriverPool = new WebDriverPool(
+        webDriverProvider,
+        linksFromMessages.size(),
+        maxPoolSize
+    );
 
     try {
       linksFromMessages.parallelStream().forEach(link -> {
-        dataRestHackForAuth();
         for (Scrapeable scraper : scrapeables) {
           Optional<Ad> ad = scrapeAd(webDriverPool, link, scraper);
           if(ad.isPresent()){
@@ -43,22 +47,11 @@ public class WebScraperService {
             log.info("Saved ad {}", ad.get());
           }
         }
-        SecurityContextHolder.clearContext();
       });
     } finally {
       webDriverPool.quit();
     }
   }
-
-  /**
-   * This is needed for AdRepository to work with data rest and spring security
-   */
-  private void dataRestHackForAuth() {
-    SecurityContextHolder.getContext().setAuthentication(
-        new UsernamePasswordAuthenticationToken("system",
-            "system", AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
-  }
-
 
   private Optional<Ad> scrapeAd(WebDriverPool webDriverPool, String link, Scrapeable scraper) {
     WebDriver webDriver = null;
