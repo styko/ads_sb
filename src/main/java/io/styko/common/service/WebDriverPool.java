@@ -23,7 +23,7 @@ public class WebDriverPool {
   }
 
   private int getSizeOfPool(int linksCount) {
-    int linksDivided = linksCount / maxPoolSize;
+    int linksDivided = linksCount / 10;
     int spawnThreads = linksDivided == 0 ? 1 : Math.min(linksDivided, maxPoolSize);
     log.info("spawnThreads {}", spawnThreads);
     return spawnThreads;
