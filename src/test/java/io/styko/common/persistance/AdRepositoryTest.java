@@ -47,6 +47,8 @@ class AdRepositoryTest {
         .address("address")
         .size(85)
         .title("title")
+        .longitude("48.2376251")
+        .latitude("17.0507557")
         .updated(Instant.now())
         .deactivated(Instant.now())
         .prices(Arrays.asList(

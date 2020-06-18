@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -57,6 +58,8 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
     BigDecimal price = propertiesExtractor.parsePrice(propertiesText);
     Instant updated = propertiesExtractor.parseUpdated(propertiesText);
 
+    WebElement map = toprealityPage.getMap();
+
     ad = Ad.builder()
         .link(link)
         .title(toprealityPage.getTitle().getText())
@@ -72,6 +75,8 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
         .currency(propertiesExtractor.parseCurrency(propertiesText))
         .size(propertiesExtractor.parseSize(propertiesText))
         .galleryUrl(toprealityPage.getPrimaryImage().getAttribute("href"))
+        .latitude(map.getAttribute("data-gpsx"))
+        .longitude(map.getAttribute("data-gpsy"))
         .build();
 
     log.info("Ad is created {}", ad);

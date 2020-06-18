@@ -91,6 +91,16 @@ databaseChangeLog:
                   type: varchar
                   constraints:
                     nullable: true
+              - column:
+                  name: latitude
+                  type: varchar
+                  constraints:
+                    nullable: true
+              - column:
+                  name: longitude
+                  type: varchar
+                  constraints:
+                    nullable: true
         - addPrimaryKey:
             columnNames: id
             constraintName: pk_ad

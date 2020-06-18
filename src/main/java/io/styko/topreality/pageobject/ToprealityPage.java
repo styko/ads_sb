@@ -25,6 +25,9 @@ public class ToprealityPage implements PageObject {
   @FindBy(css ="body > div.gray-bg.tr-border-top.tr-border-bottom > div > div > div > div.row.mt-3 > div.col-lg-8.gallery-info.pr-lg-0 > div.description > p")
   private WebElement description;
 
+  @FindBy(css = "  #map_canvas")
+  private WebElement map;
+
   @FindAll({
       @FindBy(css="#fixedContact > div.contactBox.pb-2.pt-2.d-flex.flex-wrap > div.showContact.d-grid.col-8.p-0 > span > span.badge.btn.btn-danger.showMsg"),
       @FindBy(css="#fixedContact > div.contactBox.pb-2.pt-2.d-flex.flex-wrap > div.showContact.col-8.p-0 > span > span.badge.btn.btn-danger.showMsg"),

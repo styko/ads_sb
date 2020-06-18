@@ -66,4 +66,8 @@ public class Ad implements Serializable {
   private Integer countOfUpdates; // how many times was ad updated
 
   private String galleryUrl;
+
+  private String latitude;
+
+  private String longitude;
 }
