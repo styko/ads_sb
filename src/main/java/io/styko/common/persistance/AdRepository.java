@@ -11,7 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin
-@RepositoryRestResource(collectionResourceRel = "ads", path = "ads")
+@RepositoryRestResource(collectionResourceRel = "notices", path = "notices")
 @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 public interface AdRepository extends JpaRepository<Ad, Long> {
   Optional<Ad> findByLink(String link);
