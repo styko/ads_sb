@@ -93,12 +93,12 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: latitude
-                  type: varchar
+                  type: numeric
                   constraints:
                     nullable: true
               - column:
                   name: longitude
-                  type: varchar
+                  type: numeric
                   constraints:
                     nullable: true
         - addPrimaryKey:

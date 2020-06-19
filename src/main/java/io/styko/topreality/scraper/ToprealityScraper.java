@@ -75,8 +75,8 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
         .currency(propertiesExtractor.parseCurrency(propertiesText))
         .size(propertiesExtractor.parseSize(propertiesText))
         .galleryUrl(toprealityPage.getPrimaryImage().getAttribute("href"))
-        .latitude(map.getAttribute("data-gpsx"))
-        .longitude(map.getAttribute("data-gpsy"))
+        .latitude(Double.valueOf(map.getAttribute("data-gpsx")))
+        .longitude(Double.valueOf(map.getAttribute("data-gpsy")))
         .build();
 
     log.info("Ad is created {}", ad);

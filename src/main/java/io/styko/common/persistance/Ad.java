@@ -67,7 +67,7 @@ public class Ad implements Serializable {
 
   private String galleryUrl;
 
-  private String latitude;
+  private Double latitude;
 
-  private String longitude;
+  private Double longitude;
 }
