@@ -15,12 +15,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 @DataJpaTest
 @Import({PriceConverter.class, GsonConfig.class})
 class AdRepositoryTest {
 
+  public static final double LONGITUDE = 48.2376251;
+  public static final double LATITUDE = 17.0507557;
   @Autowired
   private AdRepository adRepository;
 
@@ -47,8 +48,8 @@ class AdRepositoryTest {
         .address("address")
         .size(85)
         .title("title")
-        .longitude(48.2376251)
-        .latitude(17.0507557)
+        .longitude(LONGITUDE)
+        .latitude(LATITUDE)
         .updated(Instant.now())
         .deactivated(Instant.now())
         .prices(Arrays.asList(

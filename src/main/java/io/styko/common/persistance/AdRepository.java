@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.config.Projection;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -20,4 +21,10 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
   List<String> findAllLinksByDeactivatedIsNull();
 
   Page<Ad> findAllByDeactivatedIsNotNull(Pageable pageable);
+
+  @Projection(name = "position", types = { Ad.class })
+  interface Position {
+    Double getLatitude();
+    Double getLongitude();
+  }
 }
