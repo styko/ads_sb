@@ -88,12 +88,15 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
     String propertiesText = toprealityPage.getPropertiesList().getText();
     BigDecimal price = propertiesExtractor.parsePrice(propertiesText);
     Instant updated = propertiesExtractor.parseUpdated(propertiesText);
-    ad.setLastPrice(price);
-    ad.getPrices().add(Price.builder().value(price).updated(updated).build());
-    ad.setCountOfUpdates(ad.getCountOfUpdates() + 1);
-    ad.setDescription(toprealityPage.getDescription().getText());
-    ad.setUpdated(updated);
 
-    log.info("Ad is updated {}", ad);
+    if (!ad.getLastPrice().equals(price) || !ad.getUpdated().equals(updated)) {
+      ad.setLastPrice(price);
+      ad.getPrices().add(Price.builder().value(price).updated(updated).build());
+      ad.setCountOfUpdates(ad.getCountOfUpdates() + 1);
+      ad.setDescription(toprealityPage.getDescription().getText());
+      ad.setUpdated(updated);
+      log.info("Ad is updated {}", ad);
+    }
+    log.info("Ad is the same so its not updated {}", ad);
   }
 }
