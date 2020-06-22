@@ -25,7 +25,7 @@ public class ToprealityPage implements PageObject {
   @FindBy(css ="body > div.gray-bg.tr-border-top.tr-border-bottom > div > div > div > div.row.mt-3 > div.col-lg-8.gallery-info.pr-lg-0 > div.description > p")
   private WebElement description;
 
-  @FindBy(css = "  #map_canvas")
+  @FindBy(css = "#map_canvas")
   private WebElement map;
 
   @FindAll({
@@ -55,6 +55,10 @@ public class ToprealityPage implements PageObject {
 
   public boolean isContactButtonPresent() {
     return this.driver.getPageSource().contains("<span class=\"badge btn btn-danger showMsg\">kliknite TU !</span>");
+  }
+
+  public boolean isMapPresent() {
+    return this.driver.getPageSource().contains("#map_canvas");
   }
 
 }

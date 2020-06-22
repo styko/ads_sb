@@ -58,8 +58,6 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
     BigDecimal price = propertiesExtractor.parsePrice(propertiesText);
     Instant updated = propertiesExtractor.parseUpdated(propertiesText);
 
-    WebElement map = toprealityPage.getMap();
-
     ad = Ad.builder()
         .link(link)
         .title(toprealityPage.getTitle().getText())
@@ -75,9 +73,13 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
         .currency(propertiesExtractor.parseCurrency(propertiesText))
         .size(propertiesExtractor.parseSize(propertiesText))
         .galleryUrl(toprealityPage.getPrimaryImage().getAttribute("href"))
-        .latitude(Double.valueOf(map.getAttribute("data-gpsx")))
-        .longitude(Double.valueOf(map.getAttribute("data-gpsy")))
         .build();
+
+    if (toprealityPage.isMapPresent()){
+      WebElement map = toprealityPage.getMap();
+      ad.setLatitude(Double.valueOf(map.getAttribute("data-gpsx")));
+      ad.setLongitude(Double.valueOf(map.getAttribute("data-gpsy")));
+    }
 
     log.info("Ad is created {}", ad);
     return ad;
