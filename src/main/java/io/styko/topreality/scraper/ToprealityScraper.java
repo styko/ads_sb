@@ -91,6 +91,10 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
     BigDecimal price = propertiesExtractor.parsePrice(propertiesText);
     Instant updated = propertiesExtractor.parseUpdated(propertiesText);
 
+    if (ad == null){
+      log.info("Ad is null");
+    }
+
     if (!ad.getLastPrice().equals(price) || !ad.getUpdated().equals(updated)) {
       ad.setLastPrice(price);
       ad.getPrices().add(Price.builder().value(price).updated(updated).build());
