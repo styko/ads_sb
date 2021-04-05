@@ -43,6 +43,9 @@ public class ToprealityPage implements PageObject {
   @FindBy(css =".firstImage")
   private WebElement primaryImage;
 
+  @FindBy(css = "#showMore")
+  private WebElement showMore;
+
   public ToprealityPage(WebDriver driver, String link) {
     this.driver = driver;
     this.driver.get(link);
@@ -55,6 +58,10 @@ public class ToprealityPage implements PageObject {
 
   public boolean isContactButtonPresent() {
     return this.driver.getPageSource().contains("<span class=\"badge btn btn-danger showMsg\">kliknite TU !</span>");
+  }
+
+  public boolean isShowMorePresent() {
+    return this.driver.getPageSource().contains("<button id=\"showMore\" class=\"btn btn-outline-danger description-button mt-2\">Zobraziť celý popis</button>");
   }
 
   public boolean isMapPresent() {

@@ -1,21 +1,19 @@
 package io.styko.topreality.scraper;
 
-import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.Collections;
-import java.util.regex.Pattern;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import io.styko.common.persistance.Ad;
 import io.styko.common.persistance.Price;
 import io.styko.common.scraper.Scraper;
 import io.styko.topreality.converter.PropertiesExtractor;
 import io.styko.topreality.pageobject.ToprealityPage;
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
@@ -51,6 +49,10 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
       contact = toprealityPage.getContact().getText();
     } else {
       contact = toprealityPage.getAlternativeContact().getText();
+    }
+
+    if(toprealityPage.isShowMorePresent()){
+      toprealityPage.getShowMore().click();
     }
 
     String propertiesText = toprealityPage.getPropertiesList().getText();

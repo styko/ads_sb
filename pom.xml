@@ -13,7 +13,7 @@
   </parent>
 
   <groupId>io.styko</groupId>
-  <artifactId>realestate_email_aggregator</artifactId>
+  <artifactId>ads_sb</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
