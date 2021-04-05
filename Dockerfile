@@ -17,5 +17,5 @@ ENV JDBC_DATABASE_PASSWORD ${JDBC_DATABASE_PASSWORD}
 
 EXPOSE 8080
 #CMD ["java -jar /app/realestate_email_aggregator-1.0-SNAPSHOT.jar"]
-ENTRYPOINT ["java","-jar","realestate_email_aggregator-1.0-SNAPSHOT.jar","--spring.profiles.active=prod"]
+ENTRYPOINT ["java","-jar","ads_sb-1.0-SNAPSHOT.jar","--spring.profiles.active=prod"]
 
