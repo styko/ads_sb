@@ -46,6 +46,9 @@ public class ToprealityPage implements PageObject {
   @FindBy(css = "#showMore")
   private WebElement showMore;
 
+  @FindBy(css = "body > div.fc-consent-root > div.fc-dialog-container > div.fc-dialog.fc-choice-dialog > div.fc-footer-buttons-container > div.fc-footer-buttons > button.fc-button.fc-cta-consent.fc-primary-button")
+  private WebElement approveUserContemptButton;
+
   public ToprealityPage(WebDriver driver, String link) {
     this.driver = driver;
     this.driver.get(link);
@@ -62,6 +65,10 @@ public class ToprealityPage implements PageObject {
 
   public boolean isShowMorePresent() {
     return this.driver.getPageSource().contains("<button id=\"showMore\" class=\"btn btn-outline-danger description-button mt-2\">Zobraziť celý popis</button>");
+  }
+
+  public boolean isUserContemptPresent(){
+    return this.driver.getPageSource().contains("<h1>Topreality.sk Vás žiada o súhlas s používaním Vašich údajov na nasledujúce účely:</h1>");
   }
 
   public boolean isMapPresent() {

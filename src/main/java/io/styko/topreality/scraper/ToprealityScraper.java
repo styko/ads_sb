@@ -42,7 +42,10 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
 
   @Override
   protected Ad createAd(String link, ToprealityPage toprealityPage) {
-    Ad ad;
+    if(toprealityPage.isUserContemptPresent()){
+      toprealityPage.getApproveUserContemptButton().click();
+    }
+
     String contact;
     if(toprealityPage.isContactButtonPresent()){
       toprealityPage.getShowContactButton().click();
@@ -60,7 +63,7 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
     BigDecimal price = propertiesExtractor.parsePrice(propertiesText);
     Instant updated = propertiesExtractor.parseUpdated(propertiesText);
 
-    ad = Ad.builder()
+    Ad ad = Ad.builder()
         .link(link)
         .title(toprealityPage.getTitle().getText())
         .locality(propertiesExtractor.parseLocality(propertiesText))
@@ -93,9 +96,7 @@ public class ToprealityScraper extends Scraper<ToprealityPage> {
     BigDecimal price = propertiesExtractor.parsePrice(propertiesText);
     Instant updated = propertiesExtractor.parseUpdated(propertiesText);
 
-    if (ad == null){
-      log.info("Ad is null");
-    }
+    log.info("Ad from db {}", ad);
 
     if (!ad.getLastPrice().equals(price) || !ad.getUpdated().equals(updated)) {
       ad.setLastPrice(price);

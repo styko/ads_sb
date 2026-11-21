@@ -25,7 +25,7 @@ public class RemoteWebDriverService implements WebDriverProvider{
     log.info("create remote web driver");
     RemoteWebDriver driver = null;
     try {
-      driver = new RemoteWebDriver(new URL(seleniumHub), webDriverService.getFirefoxOptions());
+      driver = new RemoteWebDriver(new URL(seleniumHub), webDriverService.getChromeOptions());
     } catch (MalformedURLException e) {
       throw new IllegalStateException(e);
     }
